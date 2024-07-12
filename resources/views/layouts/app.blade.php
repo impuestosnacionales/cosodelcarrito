@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{ asset('app.css') }}">
 </head>
 <body>
+<li class="nav-item">
+                 <a class="nav-link" href="{{ route('checkout') }}">Carrito <span class="badge bg-danger">{{\Cart::count()}}</span></a>
+                </li>
     @yield('content')
 </body>
 </html>
