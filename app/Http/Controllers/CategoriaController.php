@@ -18,4 +18,22 @@ class CategoriaController extends Controller
 
         return view('categoria.show', compact('categoria', 'productos'));
     }
+
+    public function create()
+    {
+        return view('categoria.crear');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $categoria=new Categoria($request->all());
+        $categoria->save();
+
+        $categoria = Categoria::all();
+        return redirect()->route('home');
+        
+    }
 }

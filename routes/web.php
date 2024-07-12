@@ -76,3 +76,6 @@ Route::post('/rol',[RolController::class,'store'])->name('rol.store');
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+Route::post('/producto', [CategoriaController::class, 'store'])->name('categoria.store');
+Route::get('/po',[CategoriaController::class,'create'])->name('categoria.create');

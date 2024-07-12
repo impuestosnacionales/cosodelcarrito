@@ -24,11 +24,11 @@
                             <div class="col-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h2 class="card-title">Registrar Producto</h2>
+                                        <h2 class="card-title">Registrar Categoria</h2>
                                     </div>
                                     <div class="card-body">
                                         <hr>
-                                        <form action="{{route('producto.store')}}" method="POST">
+                                        <form action="{{route('categoria.store')}}" method="POST">
                     @csrf
                     <input type="hidden" name="_token" value="{{csrf_token()}}"> 
                     <br>
@@ -41,28 +41,8 @@
                         <input type="text" class="form-control"  name="descripcion"> 
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Precio</label>
-                        <input type="number" class="form-control"  name="precio">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Stock</label>
-                        <input type="number" class="form-control"  name="stock">
-                    </div>
-                    <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                        <div class="col-3 col-mb-3 col-sm-3">
-                            <label>Categoria</label>
-                            <select class="form-select" name="categoria_id" id="pid_articulo" aria-label="Default select example">
-                            @foreach($categorias as $cat)
-                                <option value="{{$cat->id}}">{{$cat->nombre}}</option>
-                            @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            <br>
-                        </div>
-                        </div>
+                        <label class="form-label">Codigo</label>
+                        <input type="number" class="form-control"  name="codigo">
                     </div>
   </div>
   <button type="submit" class="btn btn-primary form-control">Añadir</button>
