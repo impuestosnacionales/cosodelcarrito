@@ -18,6 +18,7 @@
                     <h3>
                         <a href="{{ route('categoria.show', ['id' => $categoria->id]) }}">{{ $categoria->nombre }}</a>
                     </h3>
+                    <h1>Holaaaaaaaaa</h1>
                 </div>
             @endforeach
         </div>
