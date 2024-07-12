@@ -43,6 +43,8 @@ Route::put('/usuario/{id}',[UsuarioController::class, 'update'])->name('usuario.
 
 
 Route::get('/producto',[ProductoController::class,'index'])->name('producto');
+Route::get('/p',[ProductoController::class,'create'])->name('producto.create');
+Route::post('/producto', [ProductoController::class, 'store'])->name('producto.store');
 Route::get('/buscar', [ProductoController::class, 'search'])->name('productos.search');
 
 

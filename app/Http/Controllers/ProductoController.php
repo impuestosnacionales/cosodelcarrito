@@ -25,4 +25,19 @@ class ProductoController extends Controller
 
         return view('home', compact('productos', 'categorias', 'query'));
     }
+    public function create()
+    {
+        //
+        $categorias=Categoria::all();
+        return view('producto.producto_crear',['categorias'=>$categorias]);
+    }
+    public function store(Request $request)
+    {
+        //
+        
+        $productos= new Producto($request->all());
+        $productos->save();
+
+        return redirect()->route('home');
+    }
 }
