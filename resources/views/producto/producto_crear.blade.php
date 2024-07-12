@@ -48,6 +48,10 @@
                         <label class="form-label">Stock</label>
                         <input type="number" class="form-control"  name="stock">
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Imagen</label>
+                        <input type="text" class="form-control"  name="image">
+                    </div>
                     <div class="card">
                     <div class="card-body">
                         <div class="row">

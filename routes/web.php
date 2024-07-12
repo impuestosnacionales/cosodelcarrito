@@ -5,10 +5,13 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
 
+
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\GoogleController;
+use app\Http\Controllers\CartController;
+
 
 
 
@@ -28,8 +31,13 @@ use App\Http\Controllers\Auth\GoogleController;
 
 
 Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::post('cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('add');
+Route::get('cart/checkout', [App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
+Route::get('cart/clear', [App\Http\Controllers\CartController::class, 'clear'])->name('clear');
+Route::post('cart/removeitem', [App\Http\Controllers\CartController::class, 'removeItem'])->name('removeitem');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/usuario',[UsuarioController::class,'index'])->name('usuario');
 
 Route::delete('/usuario/{id}/',[UsuarioController::class,'destroy'])->name('usuario.destroy');

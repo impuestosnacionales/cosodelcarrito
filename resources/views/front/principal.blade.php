@@ -31,7 +31,6 @@
                 @foreach ($productos as $producto)
                     <div class="product-item">
                         <h3>{{ $producto->nombre }}</h3>
-                        <p>{{ $producto->descripcion }}</p>
                         <p>Precio: {{ $producto->precio }}</p>
                     </div>
                 @endforeach

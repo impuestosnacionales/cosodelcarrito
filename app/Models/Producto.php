@@ -11,7 +11,7 @@ class Producto extends Model
     use HasFactory;
     protected $table= "productos";
     protected $primarykey='id';
-    protected $fillable =['nombre','descripcion','precio','stock','categoria_id'];
+    protected $fillable =['nombre','descripcion','precio','stock','image','categoria_id'];
     protected $hidden =['id'];
     public function categoria(){
         return $this->belongsTo(Categoria::class);
