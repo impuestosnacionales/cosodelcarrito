@@ -5,7 +5,6 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
 
-
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\HomeController;
@@ -51,22 +50,22 @@ Route::put('/usuario/{id}',[UsuarioController::class, 'update'])->name('usuario.
 
 
 Route::get('/producto',[ProductoController::class,'index'])->name('producto');
-Route::get('/p',[ProductoController::class,'create'])->name('producto.create');
+Route::get('/producto/crear',[ProductoController::class,'create'])->name('producto.create');
 Route::post('/producto', [ProductoController::class, 'store'])->name('producto.store');
 Route::get('/buscar', [ProductoController::class, 'search'])->name('productos.search');
 
 
 Route::delete('/producto/{id}/',[ProductoController::class,'destroy'])->name('producto.destroy');
 Route::get('/producto/{id}/ver', [ProductoController::class, 'show'])->name('producto.show');
-Route::get('/producto/crear',[ProductoController::class,'create'])->name('producto.create');
-Route::post('/producto',[ProductoController::class,'store'])->name('producto.store');
 
-Route::get('/categoria/{id}', [CategoriaController::class, 'show'])->name('categoria.show');
+
 
 
 Auth::routes();
 Route::get('/producto/{id}/editar',[ProductoController::class,'edit'])->name('producto.edit');
 Route::put('/producto/{id}',[ProductoController::class, 'update'])->name('producto.update');
+
+Route::get('/categoria/{id}', [CategoriaController::class, 'show'])->name('categoria.show');
 
 
 Route::get('/pedido',[PedidoController::class,'index'])->name('pedido');
@@ -85,5 +84,11 @@ Route::post('/rol',[RolController::class,'store'])->name('rol.store');
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-Route::post('/producto', [CategoriaController::class, 'store'])->name('categoria.store');
+Route::post('/categoria', [CategoriaController::class, 'store'])->name('categoria.store');
 Route::get('/po',[CategoriaController::class,'create'])->name('categoria.create');
+
+//HACER PEDIDO//
+Route::post('/pedido', [PedidoController::class, 'processOrder'])->name('pedido.process');
+
+//Actualizar Cart//
+Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('update.quantity');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Pedido;
 use App\Models\Producto;
+use Cart;
 use App\Models\Detalle_pedido;
 
 class PedidoController extends Controller
@@ -16,7 +17,7 @@ class PedidoController extends Controller
     public function index()
     {
         $pedidos=Pedido::all();
-        return view('pedido',['pedidos'=>$pedidos] );
+        return view('pedidos.pedido',['pedidos'=>$pedidos] );
     }
 
     /**
@@ -92,5 +93,43 @@ class PedidoController extends Controller
         $silla = Pedido::all();
         //dd($variable);
         return view('pedido',['silla'=>$silla]);
+    }
+
+    
+    public function processOrder(Request $request)
+    {
+        // Obtener el contenido del carrito
+        $cartItems = Cart::content();
+
+        // Iniciar una transacción para asegurarse de que todas las operaciones se completen correctamente
+        DB::beginTransaction();
+
+        try {
+            // Actualizar el stock de cada producto
+            foreach ($cartItems as $item) {
+                $producto = Producto::find($item->id);
+
+                if ($producto) {
+                    // Restar la cantidad del stock
+                    $producto->stock -= $item->qty;
+                    $producto->save();
+                }
+            }
+
+            // Aquí puedes agregar la lógica para crear una orden en la base de datos si es necesario
+
+            // Vaciar el carrito después de procesar el pedido
+            Cart::destroy();
+
+            // Confirmar la transacción
+            DB::commit();
+
+            return redirect()->route('pedido')->with('success', 'Pedido realizado con éxito');
+        } catch (\Exception $e) {
+            // Revertir la transacción si algo sale mal
+            DB::rollback();
+
+            return redirect()->route('pedido')->with('error', 'Hubo un problema al procesar tu pedido');
+        }
     }
 }
