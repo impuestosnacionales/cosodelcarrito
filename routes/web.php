@@ -9,8 +9,8 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\GoogleController;
-use app\Http\Controllers\CartController;
-
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PrincipalController;
 
 
 
@@ -30,7 +30,8 @@ use app\Http\Controllers\CartController;
 
 
 Auth::routes();
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+/*INDEX */
+Route::get('/', [App\Http\Controllers\PrincipalController::class,'index']);
 Route::post('cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('add');
 Route::get('cart/checkout', [App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
 Route::get('cart/clear', [App\Http\Controllers\CartController::class, 'clear'])->name('clear');
@@ -50,7 +51,7 @@ Route::put('/usuario/{id}',[UsuarioController::class, 'update'])->name('usuario.
 
 
 Route::get('/producto',[ProductoController::class,'index'])->name('producto');
-Route::get('/producto/crear',[ProductoController::class,'create'])->name('producto.create');
+Route::get('/p',[ProductoController::class,'create'])->name('producto.create');
 Route::post('/producto', [ProductoController::class, 'store'])->name('producto.store');
 Route::get('/buscar', [ProductoController::class, 'search'])->name('productos.search');
 

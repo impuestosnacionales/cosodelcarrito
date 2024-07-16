@@ -23,7 +23,7 @@ class ProductoController extends Controller
 
         $categorias = Categoria::all();
 
-        return view('home', compact('productos', 'categorias', 'query'));
+        return view('front.principal', compact('productos', 'categorias', 'query'));
     }
     public function create()
     {
@@ -38,6 +38,6 @@ class ProductoController extends Controller
         $productos= new Producto($request->all());
         $productos->save();
 
-        return redirect()->route('home');
+        return redirect()->route('principal');
     }
 }
