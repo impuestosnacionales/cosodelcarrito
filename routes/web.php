@@ -9,8 +9,8 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\GoogleController;
-use app\Http\Controllers\CartController;
-
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PrincipalController;
 
 
 
@@ -30,7 +30,13 @@ use app\Http\Controllers\CartController;
 
 
 Auth::routes();
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', function () {
+    return view('index');
+});
+
+/*INDEX */
+Route::get('/principal', [App\Http\Controllers\PrincipalController::class,'index'])->name('principal');
+
 Route::post('cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('add');
 Route::get('cart/checkout', [App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
 Route::get('cart/clear', [App\Http\Controllers\CartController::class, 'clear'])->name('clear');
@@ -50,7 +56,7 @@ Route::put('/usuario/{id}',[UsuarioController::class, 'update'])->name('usuario.
 
 
 Route::get('/producto',[ProductoController::class,'index'])->name('producto');
-Route::get('/producto/crear',[ProductoController::class,'create'])->name('producto.create');
+Route::get('/p',[ProductoController::class,'create'])->name('producto.create');
 Route::post('/producto', [ProductoController::class, 'store'])->name('producto.store');
 Route::get('/buscar', [ProductoController::class, 'search'])->name('productos.search');
 
@@ -84,8 +90,10 @@ Route::post('/rol',[RolController::class,'store'])->name('rol.store');
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
+Route::get('/categoria',[CategoriaController::class,'index'])->name('categoria');
 Route::post('/categoria', [CategoriaController::class, 'store'])->name('categoria.store');
 Route::get('/po',[CategoriaController::class,'create'])->name('categoria.create');
+Route::delete('/categoria/{id}/',[CategoriaController::class,'destroy'])->name('categoria.destroy');
 
 //HACER PEDIDO//
 Route::post('/pedido', [PedidoController::class, 'processOrder'])->name('pedido.process');

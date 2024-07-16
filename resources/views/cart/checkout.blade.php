@@ -56,13 +56,13 @@
                     @csrf
                     <button type="button" class="btn btn-primary" id="submitButton" onclick="Pedidoenviar()">Hacer Pedido</button>
                 </form><br>
-                <form action="{{route('home')}}">
+                <form action="{{route('principal')}}">
                     @csrf
                     <button type="submit" class="btn btn-primary">Agrega un producto</button>
                 </form>
                 <a href="{{route('clear')}}" class="text-center">Vaciar carrito</a>
                 @else
-                <a href="/" class="text-center">Agrega un producto</a>
+                <a href="{{route('principal')}}" class="text-center">Agrega un producto</a>
                 @endif
             </div>
         </div>       

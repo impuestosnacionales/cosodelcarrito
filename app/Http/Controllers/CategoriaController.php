@@ -33,7 +33,20 @@ class CategoriaController extends Controller
         $categoria->save();
 
         $categoria = Categoria::all();
-        return redirect()->route('home');
+        return redirect()->route('principal');
         
+    }
+    public function index()
+    {
+        //
+        $categoria=Categoria::all();
+        return view('categoria.index', ['categoria'=>$categoria]);
+    }
+    public function destroy(string $id)
+    {
+        //
+        $categoria=Categoria::findOrFail($id);
+        $categoria->delete();
+        return redirect()->action([CategoriaController::class,'index']);
     }
 }

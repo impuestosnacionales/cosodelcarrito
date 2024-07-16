@@ -8,36 +8,40 @@ use App\Models\Categoria;
 
 class ProductoController extends Controller
 {
-    // Otros métodos...
+    public function index()
+    {
+        $categorias = Categoria::all();
+        $productos = Producto::with('categoria')->get();
+        return view('producto.index', ['productos' => $productos, 'categorias' => $categorias]);
+    }
 
-    /**
-     * Handle the search request.
-     */
     public function search(Request $request)
     {
         $query = $request->input('query');
-
         $productos = Producto::where('nombre', 'LIKE', "%{$query}%")
             ->orWhere('descripcion', 'LIKE', "%{$query}%")
             ->get();
-
         $categorias = Categoria::all();
-
-        return view('home', compact('productos', 'categorias', 'query'));
+        return view('front.principal', compact('productos', 'categorias', 'query'));
     }
+
     public function create()
     {
-        //
-        $categorias=Categoria::all();
-        return view('producto.producto_crear',['categorias'=>$categorias]);
+        $categorias = Categoria::all();
+        return view('producto.producto_crear', ['categorias' => $categorias]);
     }
+
     public function store(Request $request)
     {
+        $producto = new Producto($request->all());
+        $producto->save();
+        return redirect()->route('principal');
+    }
+    public function destroy(string $id)
+    {
         //
-        
-        $productos= new Producto($request->all());
-        $productos->save();
-
-        return redirect()->route('home');
+        $producto=Producto::findOrFail($id);
+        $producto->delete();
+        return redirect()->action([ProductoController::class,'index']);
     }
 }
