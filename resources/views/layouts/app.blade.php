@@ -131,7 +131,7 @@
         @auth
           <li class="nav-item dropdown mt-1 p-1">
             <a href="#" class="nav-link dropdown-toggle text-light" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRGGPGTgrq7YXRDVskcrWurI1HqRkty1iWPw9buWSmPfJFakmGA" alt="user" width="30" height="30" class="rounded-circle">
+              <img src="https://static.wikia.nocookie.net/9ec601b8-beb0-47b9-a5ad-19d8dea9c8e8/scale-to-width/370" alt="user" width="30" height="30" class="rounded-circle">
               <span class="d-none d-sm-inline mx-1">{{ Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end text-small shadow">
