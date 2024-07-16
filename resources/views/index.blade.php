@@ -52,6 +52,8 @@
           <li><a href="#about">Quiénes somos</a></li>
           <li><a href="#services">Servicios</a></li>
           <li><a href="#contact">Contactos</a></li>
+          <li><a href="{{route('principal')}}">Productos</a></li>
+          <li><a href="{{route('login')}}">Iniciar Sesión</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

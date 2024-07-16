@@ -31,7 +31,8 @@ use App\Http\Controllers\PrincipalController;
 
 Auth::routes();
 /*INDEX */
-Route::get('/', [App\Http\Controllers\PrincipalController::class,'index'])->name('principal');
+Route::get('/principal', [App\Http\Controllers\PrincipalController::class,'index'])->name('principal');
+
 Route::post('cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('add');
 Route::get('cart/checkout', [App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
 Route::get('cart/clear', [App\Http\Controllers\CartController::class, 'clear'])->name('clear');
@@ -94,4 +95,4 @@ Route::delete('/categoria/{id}/',[CategoriaController::class,'destroy'])->name('
 Route::post('/pedido', [PedidoController::class, 'processOrder'])->name('pedido.process');
 
 //Actualizar Cart//
-Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('update.quantity');
+Route::post('/update-quantity', [CartController::class, 'updateQuantity'])->name('updateQuantity');

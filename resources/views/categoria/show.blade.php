@@ -18,19 +18,27 @@
                     <div class="card-body text-center">
                         <h2>{{$item->nombre}}</h2>
                         <p> Bs {{$item->precio}}</p>
+                        @if ($item->stock > 0)
                         <div class="quantity-buttons-container">
                             <button class="quantity-button decrement" data-id="{{ $item->id }}">-</button>
-                            <input type="number" class="quantity-input" id="quantity-{{ $item->id }}" value="0" min="0">
+                            <input type="number" class="quantity-input" id="quantity-{{ $item->id }}" value="0" min="0" max="{{ $item->stock }}" readonly>
                             <button class="quantity-button increment" data-id="{{ $item->id }}">+</button>
                         </div>
+                        @else
+                        <p style="color: red;">AGOTADO</p>
+                        @endif
                     </div>
                     <div class="card-footer">
-                        <form action="{{ route('add') }}" method="post">
+                        @if ($item->stock > 0)
+                        <form action="{{ route('add') }}" method="post" class="add-to-cart-form">
                             @csrf
                             <input type="hidden" name="id" value="{{ $item->id }}">
                             <input type="hidden" name="quantity" id="hidden-quantity-{{ $item->id }}" value="0">
                             <button type="submit" class="btn btn-primary w-100">Agregar al carrito</button>
                         </form>
+                        @else
+                        <button class="btn btn-secondary w-100" disabled>Agotado</button>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -40,6 +48,15 @@
 </main>
 
 <script>
+//Sweetalert Alertas//
+function errorstock(){
+    Swal.fire({
+    title: "¡Ocurrió un problema!",
+    text: "La cantidad no puede ser 0",
+    icon: "error"
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.increment').forEach(button => {
         button.addEventListener('click', function() {
@@ -47,8 +64,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const quantityInput = document.getElementById('quantity-' + id);
             const hiddenQuantityInput = document.getElementById('hidden-quantity-' + id);
             let quantity = parseInt(quantityInput.value);
-            quantityInput.value = ++quantity;
-            hiddenQuantityInput.value = quantity;
+            const maxQuantity = parseInt(quantityInput.getAttribute('max'));
+            if (quantity < maxQuantity) {
+                quantityInput.value = ++quantity;
+                hiddenQuantityInput.value = quantity;
+            }
         });
     });
 
@@ -61,6 +81,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (quantity > 0) {
                 quantityInput.value = --quantity;
                 hiddenQuantityInput.value = quantity;
+            }
+        });
+    });
+
+    document.querySelectorAll('.add-to-cart-form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            const id = this.querySelector('input[name="id"]').value;
+            const quantity = document.getElementById('quantity-' + id).value;
+            if (quantity == 0) {
+                event.preventDefault();
+                errorstock();
             }
         });
     });
@@ -103,4 +134,9 @@ document.addEventListener('DOMContentLoaded', function() {
     margin: 0;
 }
 </style>
+
 @endsection
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

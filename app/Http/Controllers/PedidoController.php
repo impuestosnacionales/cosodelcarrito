@@ -96,40 +96,46 @@ class PedidoController extends Controller
     }
 
     
-    public function processOrder(Request $request)
-    {
+    public function processOrder() {
         // Obtener el contenido del carrito
         $cartItems = Cart::content();
-
+        foreach ($cartItems as $item) {
+            $product = Producto::find($item->id);
+            if ($item->qty > $product->stock) {
+                return redirect()->back()->with('error', 'Uno o más productos en su carrito exceden la cantidad disponible en stock.');
+            }
+        }
+    
         // Iniciar una transacción para asegurarse de que todas las operaciones se completen correctamente
         DB::beginTransaction();
-
+    
         try {
             // Actualizar el stock de cada producto
             foreach ($cartItems as $item) {
                 $producto = Producto::find($item->id);
-
+    
                 if ($producto) {
                     // Restar la cantidad del stock
                     $producto->stock -= $item->qty;
                     $producto->save();
                 }
             }
-
+    
             // Aquí puedes agregar la lógica para crear una orden en la base de datos si es necesario
-
+    
             // Vaciar el carrito después de procesar el pedido
             Cart::destroy();
-
+    
             // Confirmar la transacción
             DB::commit();
-
+    
             return redirect()->route('pedido')->with('success', 'Pedido realizado con éxito');
         } catch (\Exception $e) {
             // Revertir la transacción si algo sale mal
             DB::rollback();
-
+    
             return redirect()->route('pedido')->with('error', 'Hubo un problema al procesar tu pedido');
         }
     }
+    
 }
