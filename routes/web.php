@@ -91,4 +91,4 @@ Route::get('/po',[CategoriaController::class,'create'])->name('categoria.create'
 Route::post('/pedido', [PedidoController::class, 'processOrder'])->name('pedido.process');
 
 //Actualizar Cart//
-Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('update.quantity');
+Route::post('/update-quantity', [CartController::class, 'updateQuantity'])->name('updateQuantity');

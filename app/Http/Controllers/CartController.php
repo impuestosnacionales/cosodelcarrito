@@ -61,5 +61,6 @@ public function updateQuantity(Request $request) {
         'cartSubtotal' => $cartSubtotal
     ]);
 }
+
 }
 

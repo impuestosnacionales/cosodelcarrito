@@ -11,5 +11,7 @@
                  <a class="nav-link" href="{{ route('checkout') }}">Carrito <span class="badge bg-danger">{{\Cart::count()}}</span></a>
                 </li>
     @yield('content')
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
