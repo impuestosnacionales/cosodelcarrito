@@ -14,9 +14,11 @@
     <tbody>
         @foreach($categoria as $categoria)
         <tr>
+        <img src="/img/{{$categoria->image}}" class="card-img-top">
             <td>{{ $categoria->nombre }}</td>
             <td>{{ $categoria->descripcion }}</td>
             <td>{{ $categoria->codigo }}</td>
+            <td>{{$categoria->image}}</td>
             <td>
             <form action="{{route('categoria.destroy', $categoria->id)}}" method="POST" style="display:inline;">
                 @csrf

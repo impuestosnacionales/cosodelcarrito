@@ -88,6 +88,7 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::get('/categoria',[CategoriaController::class,'index'])->name('categoria');
 Route::post('/categoria', [CategoriaController::class, 'store'])->name('categoria.store');
 Route::get('/po',[CategoriaController::class,'create'])->name('categoria.create');
+Route::delete('/categoria/{id}/',[CategoriaController::class,'destroy'])->name('categoria.destroy');
 
 //HACER PEDIDO//
 Route::post('/pedido', [PedidoController::class, 'processOrder'])->name('pedido.process');

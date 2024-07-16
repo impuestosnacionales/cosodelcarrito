@@ -44,6 +44,10 @@
                         <label class="form-label">Codigo</label>
                         <input type="number" class="form-control"  name="codigo">
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Imagen</label>
+                        <input type="text" class="form-control"  name="image">
+                    </div>
   </div>
   <button type="submit" class="btn btn-primary form-control">Añadir</button>
 </form>

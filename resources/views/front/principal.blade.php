@@ -17,6 +17,8 @@
                 <div class="category-item">
                     <h3>
                         <a href="{{ route('categoria.show', ['id' => $categoria->id]) }}">{{ $categoria->nombre }}</a>
+                        <img src="/img/{{$categoria->image}}" class="card-img-top">
+                        
                     </h3>
               
                 </div>
