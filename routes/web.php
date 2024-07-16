@@ -30,8 +30,13 @@ use App\Http\Controllers\PrincipalController;
 
 
 Auth::routes();
+Route::get('/', function () {
+    return view('index');
+});
+
 /*INDEX */
-Route::get('/', [App\Http\Controllers\PrincipalController::class,'index'])->name('principal');
+Route::get('/hom', [App\Http\Controllers\PrincipalController::class,'index'])->name('principal');
+
 Route::post('cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('add');
 Route::get('cart/checkout', [App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
 Route::get('cart/clear', [App\Http\Controllers\CartController::class, 'clear'])->name('clear');
