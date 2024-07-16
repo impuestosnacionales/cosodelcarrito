@@ -31,6 +31,10 @@ use App\Http\Controllers\PrincipalController;
 
 Auth::routes();
 /*INDEX */
+Route::get('/', function () {
+    return view('index');
+});
+
 Route::get('/principal', [App\Http\Controllers\PrincipalController::class,'index'])->name('principal');
 
 Route::post('cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('add');
