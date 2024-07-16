@@ -31,7 +31,7 @@ use App\Http\Controllers\PrincipalController;
 
 Auth::routes();
 /*INDEX */
-Route::get('/', [App\Http\Controllers\PrincipalController::class,'index']);
+Route::get('/', [App\Http\Controllers\PrincipalController::class,'index'])->name('principal');
 Route::post('cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('add');
 Route::get('cart/checkout', [App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
 Route::get('cart/clear', [App\Http\Controllers\CartController::class, 'clear'])->name('clear');
@@ -85,6 +85,7 @@ Route::post('/rol',[RolController::class,'store'])->name('rol.store');
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
+Route::get('/categoria',[CategoriaController::class,'index'])->name('categoria');
 Route::post('/categoria', [CategoriaController::class, 'store'])->name('categoria.store');
 Route::get('/po',[CategoriaController::class,'create'])->name('categoria.create');
 

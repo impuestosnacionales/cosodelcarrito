@@ -36,4 +36,10 @@ class CategoriaController extends Controller
         return redirect()->route('principal');
         
     }
+    public function index()
+    {
+        //
+        $categoria=Categoria::all();
+        return view('categoria.index', ['categoria'=>$categoria]);
+    }
 }
