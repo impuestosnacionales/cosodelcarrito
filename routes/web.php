@@ -96,7 +96,7 @@ Route::get('/po',[CategoriaController::class,'create'])->name('categoria.create'
 Route::delete('/categoria/{id}/',[CategoriaController::class,'destroy'])->name('categoria.destroy');
 
 //HACER PEDIDO//
-Route::post('/pedido', [PedidoController::class, 'processOrder'])->name('pedido.process');
+Route::post('/pedido/process', [PedidoController::class, 'processOrder'])->name('pedido.process');
 
 //Actualizar Cart//
 Route::post('/update-quantity', [CartController::class, 'updateQuantity'])->name('updateQuantity');
