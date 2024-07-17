@@ -33,7 +33,7 @@ class CategoriaController extends Controller
         $categoria->save();
 
         $categoria = Categoria::all();
-        return redirect()->route('principal');
+        return redirect()->route('categoria');
         
     }
     public function index()

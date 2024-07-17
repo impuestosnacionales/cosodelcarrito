@@ -35,7 +35,7 @@ class ProductoController extends Controller
     {
         $producto = new Producto($request->all());
         $producto->save();
-        return redirect()->route('principal');
+        return redirect()->route('producto');
     }
     public function destroy(string $id)
     {
