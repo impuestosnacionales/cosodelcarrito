@@ -21,13 +21,13 @@
 <section class="text-center">
   <!-- Background image -->
   <div class="p-5 bg-image" style="
-        background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
-        height: 300px;
+        background: hsla(0, 94%, 32%, 0.8);
+        height: 250px;
         "></div>
   <!-- Background image -->
 
   <div class="card mx-4 mx-md-5 shadow-5-strong" style="
-        margin-top: -100px;
+        margin-top: -200px;
         background: hsla(0, 0%, 100%, 0.8);
         backdrop-filter: blur(30px);
         ">
@@ -61,17 +61,9 @@
                                             @enderror
                                           </div>
                                         <div class="pt-1 mb-4">
-                                            <button class="btn btn-dark btn-lg btn-block" type="submit">Ingresar</button>
-                                        </div>
-                                        <div class="pt-1 mb-4">
-                                          <p>No tienes una cuenta?</p>
-                                          <a href="{{route('register')}}" class="btn btn-primary">Registrate</a>
-                                        </div>
-                                        <div class="pt-1 mb-4">
-                                        <a href="{{ route('auth.google') }}" class="btn btn-primary">Iniciar sesión con Google</a>
+                                            <button class="btn btn-danger btn-lg btn-block" type="submit">Ingresar</button>
                                         </div>
                                     </form>
-                                    
                                 </div>
                             </div>
   </div>
