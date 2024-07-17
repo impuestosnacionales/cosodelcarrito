@@ -33,10 +33,24 @@ class CartController extends Controller
     public function checkout(){
         return view('cart.checkout');
 }
-public function removeItem(Request $request){
-    Cart::remove($request->rowId);
-    return redirect()->back()->with("success","Item eliminado" );
+public function removeItem(Request $request)
+{
+    $rowId = $request->input('rowId');
+    $removeQty = $request->input('remove_qty', 1); // Default to 1 if not specified
 
+    $item = Cart::get($rowId);
+    
+    if ($item) {
+        // Si la cantidad a eliminar es mayor o igual a la cantidad en el carrito, eliminar el artículo
+        if ($removeQty >= $item->qty) {
+            Cart::remove($rowId);
+        } else {
+            // De lo contrario, reducir la cantidad del artículo en el carrito
+            Cart::update($rowId, $item->qty - $removeQty);
+        }
+    }
+
+    return redirect()->back()->with('success', 'Artículo actualizado correctamente.');
 }
 public function clear(){
     Cart::destroy();

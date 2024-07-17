@@ -36,7 +36,7 @@ class PedidoController extends Controller
     {
         DB:: beginTransaction();
         $pedido=new Pedido;
-        $pedido->num_P=$request->get('num_pedido');
+        $pedido->num_p=$request->get('num_pedido');
         $pedido->save();
         $id_producto=$request->get('id_detalle_pedido');
         $cantidad=$request->get('cantidad');
