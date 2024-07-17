@@ -34,7 +34,7 @@
                         <h2 class="card-title mb-0">Registrar Producto</h2>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('producto.store')}}" method="POST">
+                        <form action="{{route('producto.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             
@@ -60,7 +60,7 @@
                             
                             <div class="mb-3">
                                 <label class="form-label">Imagen <i class="fa-solid fa-image"></i></label>
-                                <input type="text" class="form-control custom-input" name="image">
+                                <br><input type="file" id="image" name="image" accept="image/png, image/jpeg">
                             </div>
                             
                             <div class="mb-3">

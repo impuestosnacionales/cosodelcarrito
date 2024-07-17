@@ -29,12 +29,30 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria=new Categoria($request->all());
+        // Validación del formulario
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Asegúrate de ajustar las restricciones según sea necesario
+            'nombre' => 'required|string',
+            'descripcion' => 'required|string',
+            'codigo' => 'required|integer',
+        ]);
+
+        $categoria = new Categoria($request->except('image'));
+
+        if ($request->hasFile('image')) {
+            $logoFile = $request->file('image');
+            $path = '/img';
+            $filename = date('YmdHis') . "." . $logoFile->getClientOriginalExtension();
+            $logoFile->move(public_path($path), $filename);
+
+            $categoria->image = $filename;
+        }
+
         $categoria->save();
 
-        $categoria = Categoria::all();
-        return redirect()->route('principal');
-        
+        /*$categoria = Categoria::all();
+        return redirect()->route('principal');*/
+        return redirect()->action([CategoriaController::class, 'index']);
     }
     public function index()
     {

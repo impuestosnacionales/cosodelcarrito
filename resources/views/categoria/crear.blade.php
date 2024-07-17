@@ -34,7 +34,7 @@
                         <h2 class="card-title mb-0">Registrar Categoria</h2>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('categoria.store') }}" method="POST">
+                        <form action="{{ route('categoria.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -54,8 +54,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Imagen <i class="fa-solid fa-image"></i></label>
-                                <input type="text" class="form-control custom-input" name="image">
+                                <label class="form-label">Imagen <i class="fa-solid fa-image"></i></label><br>
+                                <input type="file" id="image" name="image" accept="image/png, image/jpeg">
                             </div>
 
                             <button type="submit" class="btn btn-primary w-100">Añadir <i class="fa-solid fa-plus-circle"></i></button>

@@ -33,9 +33,29 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
-        $producto = new Producto($request->all());
+        // Validación del formulario
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Asegúrate de ajustar las restricciones según sea necesario
+            'nombre' => 'required|string',
+            'descripcion' => 'required|string',
+            'precio' => 'required|integer',
+            'stock' => 'required|integer',
+
+        ]);
+
+        $producto = new Producto($request->except('image'));
+
+        if ($request->hasFile('image')) {
+            $logoFile = $request->file('image');
+            $path = '/img';
+            $filename = date('YmdHis') . "." . $logoFile->getClientOriginalExtension();
+            $logoFile->move(public_path($path), $filename);
+
+            $producto->image = $filename;
+        }
+
         $producto->save();
-        return redirect()->route('producto');
+        return redirect()->action([ProductoController::class, 'index']);
     }
     public function destroy(string $id)
     {
