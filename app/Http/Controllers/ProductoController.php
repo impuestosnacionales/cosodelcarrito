@@ -64,4 +64,32 @@ class ProductoController extends Controller
         $producto->delete();
         return redirect()->action([ProductoController::class,'index']);
     }
+
+    public function edit(string $id)
+{
+ $producto= Producto::findOrfail($id);
+ $categoria= Categoria::all();
+  return view('producto.editar',['producto'=>$producto,'categoria'=>$categoria,]); 
+
+}
+
+/**
+ * Update the specified resource in storage.
+ */
+public function update(Request $request, string $id)
+{
+   $producto=Producto::findOrFail($id);
+   $producto->nombre = $request->nombre;
+    $producto->descripcion = $request->descripcion;
+    $producto->precio = $request->precio;
+    $producto->stock = $request->stock;
+    $producto->categoria_id= $request->categoria_id;
+
+    $producto->save();
+
+    $productos = Producto::all();
+
+    return view('producto.index',['productos'=>$productos]);
+
+}
 }

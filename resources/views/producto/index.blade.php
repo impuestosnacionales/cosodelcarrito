@@ -43,6 +43,9 @@
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
+                                <a href="{{ route('producto.edit', $producto->id) }}" class="btn btn-info btn-sm btn-actions">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
                             </td>
                         </tr>
                         @endforeach

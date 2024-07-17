@@ -101,6 +101,8 @@ Route::get('/categoria',[CategoriaController::class,'index'])->name('categoria')
 Route::post('/categoria', [CategoriaController::class, 'store'])->name('categoria.store');
 Route::get('/po',[CategoriaController::class,'create'])->name('categoria.create');
 Route::delete('/categoria/{id}/',[CategoriaController::class,'destroy'])->name('categoria.destroy');
+Route::get('/categoria/{id}/editar',[CategoriaController::class,'edit'])->name('categoria.edit');
+Route::put('/categoria/{id}',[CategoriaController::class, 'update'])->name('categoria.update');
 
 //HACER PEDIDO//
 Route::post('/pedido/process', [PedidoController::class, 'processOrder'])->name('pedido.process');

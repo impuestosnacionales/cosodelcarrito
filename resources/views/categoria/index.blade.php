@@ -7,7 +7,7 @@
             <h1 class="mb-0">Lista de Categorías</h1>
         </div>
         <div class="card-body">
-            <a href="{{ route('categoria.create') }}" class="btn btn-primary mb-3">Añadir productos</a>
+            <a href="{{ route('categoria.create') }}" class="btn btn-primary mb-3">Añadir categorias</a>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover">
                     <thead class="text-gray">
@@ -38,6 +38,9 @@
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
+                                <a href="{{ route('categoria.edit', $categoria->id) }}" class="btn btn-info btn-sm btn-actions">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
                             </td>
                         </tr>
                         @endforeach

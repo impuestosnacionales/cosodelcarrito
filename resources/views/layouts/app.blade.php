@@ -125,6 +125,9 @@
           <li class="nav-item mt-1 p-1">
             <a href="{{ route('categoria') }}" class="nav-link text-light"><i class="bi bi-house-door-fill"> </i> Administrar categorias</a>
           </li>
+          <li class="nav-item mt-1 p-1">
+            <a href="{{ route('pedido') }}" class="nav-link text-light"><i class="bi bi-house-door-fill"> </i> Administrar pedidos</a>
+          </li>
         @endauth
         @guest
           <li class="nav-item mt-1 p-1">

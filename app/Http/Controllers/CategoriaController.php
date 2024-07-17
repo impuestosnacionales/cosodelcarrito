@@ -67,4 +67,26 @@ class CategoriaController extends Controller
         $categoria->delete();
         return redirect()->action([CategoriaController::class,'index']);
     }
+
+    public function edit(string $id)
+    {
+         $categoria= Categoria::findOrfail($id);
+       return view('categoria.editar',['categoria'=>$categoria]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+    $categoria=Categoria::findOrFail($id);
+    $categoria->nombre = $request->nombre;
+    $categoria->descripcion = $request->descripcion;
+    $categoria->codigo = $request->codigo;
+  
+    $categoria->save();
+
+    $categoria = Categoria::all();
+    return view('categoria.index',['categoria'=>$categoria]); 
+    }
 }
