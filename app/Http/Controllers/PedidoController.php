@@ -19,6 +19,19 @@ class PedidoController extends Controller
         $pedidos=Pedido::all();
         return view('pedidos.pedido',['pedidos'=>$pedidos] );
     }
+    public function clientepedido($id){
+        $detalle = Detalle_pedido::where('pedido_id', $id)->get(); // Filtrar los detalles del pedido específico
+        $pedido = Pedido::findOrFail($id);
+        return view('pedidos.detallecliente', ['pedido' => $pedido, 'detalle' => $detalle]);
+    }
+
+    public function show(string $id)
+    {
+        $detalle = Detalle_pedido::all();
+        $pedido=Pedido::findOrFail($id);
+        return view('pedidos.pedido_ver',['pedido'=>$pedido , 'detalle'=>$detalle]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -61,12 +74,7 @@ class PedidoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $pedido=Pedido::findOrFail($id);
-        return view('pedido_ver',['pedido'=>$pedido]);
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -96,46 +104,60 @@ class PedidoController extends Controller
     }
 
     
-    public function processOrder() {
-        // Obtener el contenido del carrito
-        $cartItems = Cart::content();
-        foreach ($cartItems as $item) {
-            $product = Producto::find($item->id);
-            if ($item->qty > $product->stock) {
-                return redirect()->back()->with('error', 'Uno o más productos en su carrito exceden la cantidad disponible en stock.');
-            }
-        }
+    public function processOrder(Request $request)
+{
+    // Obtener el contenido del carrito
+    $cartItems = Cart::content();
     
-        // Iniciar una transacción para asegurarse de que todas las operaciones se completen correctamente
-        DB::beginTransaction();
-    
-        try {
-            // Actualizar el stock de cada producto
-            foreach ($cartItems as $item) {
-                $producto = Producto::find($item->id);
-    
-                if ($producto) {
-                    // Restar la cantidad del stock
-                    $producto->stock -= $item->qty;
-                    $producto->save();
-                }
-            }
-    
-            // Aquí puedes agregar la lógica para crear una orden en la base de datos si es necesario
-    
-            // Vaciar el carrito después de procesar el pedido
-            Cart::destroy();
-    
-            // Confirmar la transacción
-            DB::commit();
-    
-            return view('pedidos.pedido',['cartItems'=>$cartItems]);
-        } catch (\Exception $e) {
-            // Revertir la transacción si algo sale mal
-            DB::rollback();
-    
-            return view('pedidos.pedido', ['cartItems'=>$cartItems])->with('error', 'Hubo un problema al procesar tu pedido');
+    // Verificar el stock de los productos
+    foreach ($cartItems as $item) {
+        $product = Producto::find($item->id);
+        if ($item->qty > $product->stock) {
+            return redirect()->back()->with('error', 'Uno o más productos en su carrito exceden la cantidad disponible en stock.');
         }
     }
+
+    DB::beginTransaction();
+
+    try {
+        // Crear el nuevo pedido
+        $ultimoPedido = Pedido::orderBy('id', 'desc')->first();
+        $nuevoNumPedido = $ultimoPedido ? $ultimoPedido->num_pedido + 1 : 1;
+        
+        $pedido = new Pedido();
+        $pedido->num_pedido = $nuevoNumPedido;
+        // Asignar el id del usuario autenticado
+        $pedido->fecha = now();
+        $pedido->estado = 'nuevo';
+        $pedido->save();
+
+        // Guardar los detalles del pedido y actualizar el stock de productos
+        foreach ($cartItems as $item) {
+            $detalle = new Detalle_pedido();
+            $detalle->id_pedido = $pedido->id;
+            $detalle->id_producto = $item->id;
+            $detalle->cantidad = $item->qty;
+            $detalle->total = $item->qty * $item->price; // Asegurarse de que el campo total esté en Detalle_pedido
+            $detalle->save();
+
+            $producto = Producto::find($item->id);
+            if ($producto) {
+                $producto->stock -= $item->qty;
+                $producto->save();
+            }
+        }
+
+        Cart::destroy();
+
+        DB::commit();
+
+        return view('pedidos.pedidocliente', ['pedido' => $pedido])->with('success', 'Pedido realizado con éxito');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error', 'Ocurrió un error al procesar el pedido.');
+    }
+}
+
     
 }

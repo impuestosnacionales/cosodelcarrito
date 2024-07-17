@@ -12,4 +12,9 @@ class Detalle_pedido extends Model
     protected $table="detalle_pedidos";
     protected $primarykey="id";
     protected $fillable=['total','cantidad','id_producto','id_pedido'];
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id_producto', 'id');
+    }
 }

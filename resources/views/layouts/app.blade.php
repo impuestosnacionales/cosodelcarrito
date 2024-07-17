@@ -115,6 +115,9 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
       <ul class="navbar-nav">
+        <li class="nav-item mt-1 p-1">
+            <a href="{{route('pedido.client')}}" class="nav-link text-light">Volver al Pedido</a>
+        </li>
         @auth
           <li class="nav-item mt-1 p-1">
             <a href="{{ route('producto') }}" class="nav-link text-light"><i class="fa-brands fa-product-hunt"> </i> Administrar productos</a>

@@ -77,6 +77,7 @@ Route::get('/categoria/{id}', [CategoriaController::class, 'show'])->name('categ
 Route::get('/pedido',[PedidoController::class,'index'])->name('pedido');
 Route::get('/pedido/crear',[PedidoController::class,'create'])->name('pedido.create');
 Route::post('/pedido',[PedidoController::class,'store'])->name('pedido.store');
+Route::get('/pedido/{id}/ver',[PedidoController::class,'show'])->name('pedido.show');
 
 
 
@@ -97,6 +98,8 @@ Route::delete('/categoria/{id}/',[CategoriaController::class,'destroy'])->name('
 
 //HACER PEDIDO//
 Route::post('/pedido/process', [PedidoController::class, 'processOrder'])->name('pedido.process');
+Route::get('/pedido/cliente', [PedidoController::class, 'clientepedido'])->name('pedido.client');
+
 
 //Actualizar Cart//
 Route::post('/update-quantity', [CartController::class, 'updateQuantity'])->name('updateQuantity');

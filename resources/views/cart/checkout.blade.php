@@ -4,6 +4,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="cart">
@@ -11,12 +12,15 @@
                 @if (Cart::count())
                 <table class="table table-striped">
                     <thead>
-                        <th>ID</th>
-                        <th>NOMBRE</th>
-                        <th>CANTIDAD</th>
-                        <th>PRECIO UNITARIO</th>
-                        <th>IMPORTE</th>
-                        <th>ESTADO</th>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>CANTIDAD</th>
+                            <th>PRECIO UNITARIO</th>
+                            <th>IMPORTE</th>
+                            <th>ESTADO</th>
+                            <th>ACCIÓN</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach (Cart::content() as $item)
@@ -24,8 +28,8 @@
                             <td><img src="/img/{{$item->options->image}}" width="50"></td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->qty}}</td>
-                            <td>{{number_format($item->price)}}</td>
-                            <td>{{number_format($item->qty * $item->price)}}</td>
+                            <td>{{number_format($item->price, 2)}}</td>
+                            <td>{{number_format($item->qty * $item->price, 2)}}</td>
                             <td>
                                 @php
                                     $product = \App\Models\Producto::find($item->id);
@@ -54,9 +58,11 @@
                     </tbody>
                 </table>
                 <form action="{{ route('pedido.process') }}" method="post" id="pedidoForm">
-                    @csrf
-                    <button type="button" class="btn btn-primary" id="submitButton" onclick="Pedidoenviar()">Hacer Pedido</button>
+                 @csrf
+                 <button type="button" class="btn btn-primary" id="submitButton" onclick="Pedidoenviar()">Hacer Pedido</button>
                 </form><br>
+
+                
                 <form action="{{route('principal')}}">
                     @csrf
                     <button type="submit" class="btn btn-primary">Agrega un producto</button>
@@ -66,9 +72,10 @@
                 <a href="{{route('principal')}}" class="text-center">Agrega un producto</a>
                 @endif
             </div>
-        </div>       
+        </div>
     </div>
 </div>
+
 <script>
 function Pedidoenviar() {
     Swal.fire({
