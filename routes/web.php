@@ -15,9 +15,6 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PrincipalController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
