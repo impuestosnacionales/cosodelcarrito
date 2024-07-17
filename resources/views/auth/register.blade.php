@@ -51,7 +51,19 @@
                 </div>
               </div>
             </div>
-
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                  <label class="form-label" for="id_rol">Rol</label>
+                  <select class="form-select" name="id_rol" id="id_rol">
+                      @foreach ($roles as $rol)
+                          <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                      @endforeach
+                  </select>
+                  @error('id_rol')
+                  <p class="text-danger mt-2">* {{ $message }}</p>
+                  @enderror
+              </div>
+          </div>
             <!-- Password input -->
             <div class="form-outline mb-4">
               <input type="password" name="password" class="form-control"  />

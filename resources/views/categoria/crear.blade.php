@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="card-body">
                                         <hr>
-                                        <form action="{{route('categoria.store')}}" method="POST">
+                                        <form action="{{route('categoria.store')}}" method="post" enctype="multipart/form-data>
                     @csrf
                     <input type="hidden" name="_token" value="{{csrf_token()}}"> 
                     <br>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Imagen</label>
-                        <input type="text" class="form-control"  name="image">
+                        <input type="file" id="image" name="image">
                     </div>
   </div>
   <button type="submit" class="btn btn-primary form-control">Añadir</button>
