@@ -50,10 +50,10 @@ class CategoriaController extends Controller
         }
 
         $categoria->save();
-        return redirect()->action([CategoriaController::class, 'index']);
 
-        /*$categoria = Categoria::all();
-        return redirect()->route('principal');*/
+        $categoria = Categoria::all();
+        return redirect()->route('categoria');
+        
     }
     public function index()
     {

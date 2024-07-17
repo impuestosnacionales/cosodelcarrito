@@ -1,70 +1,75 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <title>Title</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('admin.layouts2.master')
 
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-</head>
+@section('content')
+<style>
+    .custom-container {
+        background-color: #ffffff; /* Fondo blanco para el contenedor */
+        padding: 30px;
+        border-radius: 25px; /* Bordes redondeados */
+        box-shadow: 0 4px 8px rgba(0, 0, 1, 1); /* Sombra para el contenedor */
+    }
+    .custom-input {
+        border: 0;
+        border-bottom: 2px solid #ccc;
+        border-radius: 0;
+        padding-left: 0;
+    }
+    .custom-input:focus {
+        border-bottom: 2px solid #007bff;
+        box-shadow: none;
+    }
+    .custom-header {
+        background-color: #ffffff;
+        color: #000000;
+        border-bottom: 2px solid #ccc;
+    }
+</style>
 
-<body>
-<div class="container-fluid">
-        <main class="col ps-md-2 pt-2">
-            <div class="row">
-                <div class="col-12">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h2 class="card-title">Registrar Categoria</h2>
-                                    </div>
-                                    <div class="card-body">
-                                        <hr>
-                                        <form action="{{route('categoria.store')}}" method="post" enctype="multipart/form-data>
-                    @csrf
-                    <input type="hidden" name="_token" value="{{csrf_token()}}"> 
-                    <br>
-                    <div class="mb-3">
-                        <label class="form-label">Nombre</label>
-                        <input type="text" class="form-control"  name="nombre"> 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="custom-container">
+                <div class="card custom-card">
+                    <div class="card-header custom-header">
+                        <h2 class="card-title mb-0">Registrar Categoria</h2>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Descripcion</label>
-                        <input type="text" class="form-control"  name="descripcion"> 
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Codigo</label>
-                        <input type="number" class="form-control"  name="codigo">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Imagen</label>
-                        <input type="file" id="image" name="image">
-                    </div>
-  </div>
-  <button type="submit" class="btn btn-primary form-control">Añadir</button>
-</form>
-                                    </div>
-                                </div>
+                    <div class="card-body">
+                        <form action="{{ route('categoria.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                            <div class="mb-3">
+                                <label class="form-label">Nombre <i class="fa-solid fa-tag"></i></label>
+                                <input type="text" class="form-control custom-input" name="nombre">
                             </div>
-                        </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Descripción <i class="fa-solid fa-file-alt"></i></label>
+                                <input type="text" class="form-control custom-input" name="descripcion">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Código <i class="fa-solid fa-barcode"></i></label>
+                                <input type="number" class="form-control custom-input" name="codigo">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Imagen <i class="fa-solid fa-image"></i></label>
+                                <input type="text" class="form-control custom-input" name="image">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Añadir <i class="fa-solid fa-plus-circle"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGz5S5pQvF9JRvh4l5j2IGbF5Ik9kKyZ6I1pZ8RJfK4tw" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnK0CZp3FYZy4zF6U9c7XGc8KIWkn4t" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-</body>
-</html>
+@endsection
 

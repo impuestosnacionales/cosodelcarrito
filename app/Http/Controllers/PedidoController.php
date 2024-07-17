@@ -129,12 +129,12 @@ class PedidoController extends Controller
             // Confirmar la transacción
             DB::commit();
     
-            return redirect()->route('pedido')->with('success', 'Pedido realizado con éxito');
+            return view('pedidos.pedido',['cartItems'=>$cartItems]);
         } catch (\Exception $e) {
             // Revertir la transacción si algo sale mal
             DB::rollback();
     
-            return redirect()->route('pedido')->with('error', 'Hubo un problema al procesar tu pedido');
+            return view('pedidos.pedido', ['cartItems'=>$cartItems])->with('error', 'Hubo un problema al procesar tu pedido');
         }
     }
     
