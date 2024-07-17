@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>GorettiSnackXpress</title>
-
+  <!-- Favicons -->
+  <link href="{{ asset('assets/img/favicon1.png') }}" rel="icon">
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('backend/assets/modules/fontawesome/css/all.min.css')}}">

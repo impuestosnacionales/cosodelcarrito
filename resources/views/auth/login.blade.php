@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>GorettiSnackXpress</title>
+    <!-- Favicons -->
+    <link href="{{ asset('assets/img/favicon1.png') }}" rel="icon">
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -46,12 +48,18 @@
                                         <div class="form-outline mb-4">
                                             <label class="form-label" for="form2Example17">Gmail</label>
                                             <input type="email" name="email" id="email" class="form-control form-control-lg" />
-                                        </div>
+                                            @error('email')
+                                                <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+                                            @enderror
+                                          </div>
 
                                         <div class="form-outline mb-4">
                                             <label class="form-label" for="form2Example27">Contraseña</label>
                                             <input type="password" name="password" id="password" id="form2Example27" class="form-control form-control-lg" />
-                                        </div>
+                                            @error('password')
+                                                <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+                                            @enderror
+                                          </div>
                                         <div class="pt-1 mb-4">
                                             <button class="btn btn-dark btn-lg btn-block" type="submit">Ingresar</button>
                                         </div>
