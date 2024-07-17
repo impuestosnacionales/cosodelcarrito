@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>GorettiSnackXpress</title>
+    <!-- Favicons -->
+    <link href="{{ asset('assets/img/favicon1.png') }}" rel="icon">
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,19 +44,40 @@
                 <div class="form-outline">
                   <input type="text" name="name" class="form-control" />
                   <label class="form-label" for="form3Example1">Nombre</label>
+                  @error('name')
+                    <p class="text-danger mt-2">* {{ $message }}</p>
+                  @enderror
                 </div>
               </div>
               <div class="col-md-6 mb-4">
                 <div class="form-outline">
                   <input type="email" name="email" class="form-control" />
+                  @error('email')
+                    <p class="text-danger mt-2">* {{ $message }}</p>
+                  @enderror
                   <label class="form-label" for="form3Example2">Correo</label>
                 </div>
               </div>
             </div>
-
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                  <label class="form-label" for="id_rol">Rol</label>
+                  <select class="form-select" name="id_rol" id="id_rol">
+                      @foreach ($roles as $rol)
+                          <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                      @endforeach
+                  </select>
+                  @error('id_rol')
+                  <p class="text-danger mt-2">* {{ $message }}</p>
+                  @enderror
+              </div>
+          </div>
             <!-- Password input -->
             <div class="form-outline mb-4">
               <input type="password" name="password" class="form-control"  />
+              @error('password')
+                <p class="text-danger mt-2">* {{ $message }}</p>
+              @enderror
               <label class="form-label" for="form3Example4">Contraseña</label>
             </div>
 

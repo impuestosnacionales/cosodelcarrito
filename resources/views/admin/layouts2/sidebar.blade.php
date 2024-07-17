@@ -4,7 +4,7 @@
       <a href="/principal">GorettiSnackXpress</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-      <a href="index.html">SV</a>
+      <a href="index.html">GSX</a>
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">MENU</li>

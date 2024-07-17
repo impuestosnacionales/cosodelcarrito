@@ -10,7 +10,7 @@
             <img src="https://static.wikia.nocookie.net/9ec601b8-beb0-47b9-a5ad-19d8dea9c8e8/scale-to-width/370" alt="user" width="30" height="30" class="rounded-circle">
             <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <form method="POST" action="{{ route('logout') }}">
+              <form method="get" action="{{ route('logout') }}">
                 @csrf
                 <a href="{{ route('logout')  }}" onclick="event.preventDefault(); this.closest('form').submit();"
                 class="dropdown-item has-icon text-danger"><i class="fas fa-sign-out-alt"></i> Cerrar sesión

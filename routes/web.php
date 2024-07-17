@@ -5,15 +5,15 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
 
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
+
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PrincipalController;
-
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +29,19 @@ use App\Http\Controllers\PrincipalController;
 
 
 
-Auth::routes();
 /*INDEX */
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/login', [SessionsController::class, 'create'])->name('login');
+Route::post('/login', [SessionsController::class, 'store'])->name('login.store');
+
+Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout')->middleware('auth');
+
+Route::get('/register', [RegisterController::class, 'create'])->name('register')->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
 
 Route::get('/principal', [App\Http\Controllers\PrincipalController::class,'index'])->name('principal');
 
@@ -49,7 +57,6 @@ Route::delete('/usuario/{id}/',[UsuarioController::class,'destroy'])->name('usua
 Route::get('/usuario/{id}/ver', [UsuarioController::class, 'show'])->name('usuario.show');
 Route::get('/usuario/crear',[UsuarioController::class,'create'])->name('usuario.create');
 Route::post('/usuario',[UsuarioController::class,'store'])->name('usuario.store');
-Auth::routes();
 Route::get('/usuario/{id}/editar',[UsuarioController::class,'edit'])->name('usuario.edit');
 Route::put('/usuario/{id}',[UsuarioController::class, 'update'])->name('usuario.update');
 
@@ -67,7 +74,6 @@ Route::get('/producto/{id}/ver', [ProductoController::class, 'show'])->name('pro
 
 
 
-Auth::routes();
 Route::get('/producto/{id}/editar',[ProductoController::class,'edit'])->name('producto.edit');
 Route::put('/producto/{id}',[ProductoController::class, 'update'])->name('producto.update');
 

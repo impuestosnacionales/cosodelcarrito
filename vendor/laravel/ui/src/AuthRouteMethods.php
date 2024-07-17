@@ -38,12 +38,6 @@ class AuthRouteMethods
                     $this->resetPassword();
                 }
 
-                // Password Confirmation Routes...
-                if ($options['confirm'] ??
-                    class_exists($this->prependGroupNamespace('Auth\ConfirmPasswordController'))) {
-                    $this->confirmPassword();
-                }
-
                 // Email Verification Routes...
                 if ($options['verify'] ?? false) {
                     $this->emailVerification();
@@ -72,13 +66,6 @@ class AuthRouteMethods
      *
      * @return callable
      */
-    public function confirmPassword()
-    {
-        return function () {
-            $this->get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
-            $this->post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
-        };
-    }
 
     /**
      * Register the typical email verification routes for an application.
