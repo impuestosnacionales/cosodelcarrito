@@ -40,6 +40,7 @@
                                 <form action="{{route('removeitem')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="rowId" value="{{$item->rowId}}">
+                                    <input type="number" name="remove_qty" value="1" min="1" max="{{$item->qty}}" class="form-control form-control-sm" style="width: 60px; display: inline-block;">
                                     <input type="submit" name="btn" class="btn btn-danger btn-sm" value="x">
                                 </form>
                             </td>
@@ -69,7 +70,6 @@
     </div>
 </div>
 <script>
-
 function Pedidoenviar() {
     Swal.fire({
         icon: "success",
@@ -82,16 +82,14 @@ function Pedidoenviar() {
     });
 }
 
+function carterror() {
+    Swal.fire({
+        icon: "error",
+        title: "¡Ocurrió un problema!",
+        text: "Uno o varios productos tienen una cantidad excedida",
+    });
+}
 
-
-
-     function carterror(){
-        Swal.fire({
-  icon: "error",
-  title: "¡Ocurrió un problema!",
-  text: "Uno o varios productos tienen una cantidad excedida",
-});
-    }
 document.addEventListener('DOMContentLoaded', function() {
     let hasExceeded = false;
     @foreach (Cart::content() as $item)
@@ -110,6 +108,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 @endsection
-
-
-

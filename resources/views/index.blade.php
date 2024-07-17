@@ -71,6 +71,8 @@
       <div class="container d-flex flex-column align-items-center justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
         <h2>Goretti SnackXpress</h2>
         <p><span class="typed" data-typed-items="Rápido, Moderno, Seguro, Fácil"></span></p>
+        <a href="{{ url('/principal') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">¡Click para pedir!</a>
+                
       </div>
 
     </section><!-- /Hero Section -->
